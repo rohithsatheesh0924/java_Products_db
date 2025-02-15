@@ -13,7 +13,8 @@ public class Main {
             System.out.println("3. update product");
             System.out.println("4. search product");
             System.out.println("5. list products");
-            System.out.println("6. exit");
+            System.out.println("6.filter by price");
+            System.out.println("7. exit");
             int choice = scanner.nextInt();
             scanner.nextLine(); 
 
@@ -79,7 +80,16 @@ public class Main {
                     printList();
                     break;
 
-                case 6:
+              //Filter by pricing      
+                    case 6:
+                    {
+                        System.out.println("enter the range of price: ");
+                        int maxPrice= scanner.nextInt();
+                        filterProduct(maxPrice);
+                        break;
+                    }
+
+                case 7:
                     return;
 
                 default:
@@ -168,6 +178,23 @@ public class Main {
             }
         }
         System.out.println("Product not found!");
+    }
+    public static void filterProduct(int maxPrice) {
+        boolean found = false;
+        for (Product product : listOfProducts) {
+            if (product.getProductPrice() <= maxPrice) {
+                System.out.println("ID: " + product.getProductId());
+                System.out.println("Name: " + product.getProductName());
+                System.out.println("Price: " + product.getProductPrice());
+                System.out.println("Description: " + product.getProductDescription());
+                System.out.println("Quantity: " + product.getProductQuantity());
+                System.out.println("---------------------------");
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No products found under the price: " + maxPrice);
+        }
     }
     
 }
